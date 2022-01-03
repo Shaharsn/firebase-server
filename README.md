@@ -96,7 +96,7 @@ module.exports = typeDefs;
 
 ```
 
->  NOTE: We are using standard contact schema for these tutorials.
+>  NOTE: We are using standard Employee schema for these tutorials.
 
 >  The schema will go inside the gql function (between the backticks). The language we'll use to write the schema is GraphQL's schema definition language (SDL). [Reference](https://www.apollographql.com/docs/tutorial/schema/#define-your-schemas-types)
 
@@ -140,7 +140,7 @@ const resolvers = {
   },
   Mutation: {
     addEmployee: (id, name, email, role) =>
-      admin.database().ref("contacts").push({
+      admin.database().ref("employees").push({
         id: id,
         name: name,
         email: email,
