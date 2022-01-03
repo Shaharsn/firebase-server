@@ -12,13 +12,16 @@ const resolvers = {
         .then((val) => Object.keys(val).map((key) => val[key])),
   },
   Mutation: {
-    addEmployee: (id, name, email, role) =>
-      admin.database().ref("contacts").push({
-        id: id,
-        name: name,
-        email: email,
-        role: role,
-      }).key,
+    addEmployee: (parent, args, context, info) => {
+      admin.database().ref("employees").child(args.id).set({
+        id: args.id,
+        name: args.name,
+        email: args.email,
+        role: args.role,
+      });
+
+      return args;
+    }
   },
 };
 

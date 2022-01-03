@@ -25,6 +25,4 @@ server.start().then((res) => {
   
 });
 
-//server.applyMiddleware({ app, path: "/", cors: true });
-
 exports.graphql = functions.https.onRequest(app);

@@ -16,7 +16,7 @@ const typeDefs = gql`
       name: String!
       email: String!
       role: String!
-    ): String
+    ): Employee
   }
 `;
 
