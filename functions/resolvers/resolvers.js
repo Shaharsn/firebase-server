@@ -9,15 +9,13 @@ const resolvers = {
         .ref("employees")
         .once("value")
         .then((snap) => snap.val())
-        .then((val) => Object.keys(val).map((key) => val[key])),
-
-    projects: () =>
-      admin
-        .database()
-        .ref("projects")
-        .once("value")
-        .then((snap) => snap.val())
-        .then((val) => Object.keys(val).map((key) => val[key])),
+        .then((valuesMap) => {
+          if (valuesMap) {
+            return Object.keys(valuesMap).map((key) => valuesMap[key]);
+          } else {
+            return null;
+          }
+        }),
 
     employeeById: (parent, args, context, info) =>
       admin
@@ -26,6 +24,30 @@ const resolvers = {
         .child(args.id)
         .once("value")
         .then((snap) => snap.val()),
+
+    employeeByEmail: (parent, args, context, info) =>
+      admin
+        .database()
+        .ref("employees")
+        .orderByChild("email")
+        .equalTo(args.email)
+        .once("value")
+        .then((snap) => snap.val())
+        .then((valuesMap) => {
+          if (valuesMap) {
+            return Object.keys(valuesMap).map((key) => valuesMap[key]);
+          } else {
+            return null;
+          }
+        }),
+
+    projects: () =>
+      admin
+        .database()
+        .ref("projects")
+        .once("value")
+        .then((snap) => snap.val())
+        .then((val) => Object.keys(val).map((key) => val[key])),
 
     projectById: (parent, args, context, info) =>
       admin

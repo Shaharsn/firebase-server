@@ -18,8 +18,9 @@ const typeDefs = gql`
 
   type Query {
     employees: [Employee]
-    projects: [Project]
     employeeById(id: String!): Employee
+    employeeByEmail(email: String!): [Employee]
+    projects: [Project]
     projectById(id: String!): Project
   }
 
