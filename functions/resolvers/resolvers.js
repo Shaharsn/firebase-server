@@ -57,6 +57,7 @@ const resolvers = {
         .once("value")
         .then((snap) => snap.val()),
   },
+
   Mutation: {
     addEmployee: (parent, args, context, info) => {
       admin.database().ref("employees").child(args.id).set({
@@ -77,6 +78,39 @@ const resolvers = {
       });
 
       return args;
+    },
+
+    updateEmployee: (parent, args, context, info) => {
+      admin.database().ref("employees").child(args.id).update({
+        id: args.id,
+        name: args.name,
+        email: args.email,
+        role: args.role,
+      });
+
+      return true;
+    },
+
+    updateProject: (parent, args, context, info) => {
+      admin.database().ref("projects").child(args.id).update({
+        id: args.id,
+        name: args.name,
+        description: args.description,
+      });
+
+      return true;
+    },
+
+    deleteEmployee: (parent, args, context, info) => {
+      admin.database().ref("employees").child(args.id).remove();
+
+      return true;
+    },
+
+    deleteProject: (parent, args, context, info) => {
+      admin.database().ref("projects").child(args.id).remove();
+
+      return true;
     },
   },
 };

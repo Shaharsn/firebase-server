@@ -25,14 +25,14 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addEmployee(
-      id: String!
-      name: String!
-      email: String!
-      role: String!
-    ): Employee
-
+    addEmployee(id: String!, name: String!, email: String!, role: String!): Employee
     addProject(id: String!, name: String!, description: String): Project
+
+    updateEmployee(id: String!, name: String, email: String, role: String): Boolean
+    updateProject(id: String!, name: String, description: String): Project
+
+    deleteEmployee(id: String!): String
+    deleteProject(id: String!): String
   }
 `;
 
