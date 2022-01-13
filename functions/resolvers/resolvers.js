@@ -88,7 +88,7 @@ const resolvers = {
         role: args.role,
       });
 
-      return true;
+      return args;
     },
 
     updateProject: (parent, args, context, info) => {
@@ -98,19 +98,19 @@ const resolvers = {
         description: args.description,
       });
 
-      return true;
+      return args;
     },
 
     deleteEmployee: (parent, args, context, info) => {
       admin.database().ref("employees").child(args.id).remove();
 
-      return true;
+      return {id: args.id};
     },
 
     deleteProject: (parent, args, context, info) => {
       admin.database().ref("projects").child(args.id).remove();
 
-      return true;
+      return {id: args.id};
     },
   },
 };

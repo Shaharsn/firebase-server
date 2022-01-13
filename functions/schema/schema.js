@@ -28,11 +28,11 @@ const typeDefs = gql`
     addEmployee(id: String!, name: String!, email: String!, role: String!): Employee
     addProject(id: String!, name: String!, description: String): Project
 
-    updateEmployee(id: String!, name: String, email: String, role: String): Boolean
+    updateEmployee(id: String!, name: String, email: String, role: String): Employee
     updateProject(id: String!, name: String, description: String): Project
 
-    deleteEmployee(id: String!): String
-    deleteProject(id: String!): String
+    deleteEmployee(id: String!): Employee
+    deleteProject(id: String!): Project
   }
 `;
 
