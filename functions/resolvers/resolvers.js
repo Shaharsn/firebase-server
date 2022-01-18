@@ -112,6 +112,44 @@ const resolvers = {
 
       return {id: args.id};
     },
+
+    updateEmployeeProjects:(parent, args, context, info) => {
+
+      args.employeesWithProjects.forEach((emp) => {
+        let updatedProjectList = [];
+
+        emp.projects.forEach(proj => {
+          updatedProjectList.push({
+            id: proj.id, name: proj.name, description: proj.description
+          });
+        });
+
+        admin.database().ref("employees").child(emp.id).update({
+          projects: updatedProjectList
+        });
+      });
+
+      return args.employeesWithProjects;
+    },
+
+    updateProjectEmployees:(parent, args, context, info) => {
+
+      args.projectsWithEmployees.forEach((proj) => {
+        let updatedEmployeesList = [];
+
+        proj.employees.forEach(emp => {
+          updatedEmployeesList.push({
+            id: emp.id, name: emp.name, email: emp.email, role: emp.role
+          });
+        });
+
+        admin.database().ref("projects").child(proj.id).update({
+          employees: updatedEmployeesList
+        });
+      });
+
+      return args.projectsWithEmployees;
+    },
   },
 };
 

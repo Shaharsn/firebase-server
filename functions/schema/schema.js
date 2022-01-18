@@ -1,6 +1,37 @@
 const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
+
+input ProjectInput {
+    id: ID!
+    name: String
+    description: String
+  }
+
+  input EmployeeInput {
+    id: ID!
+    name: String
+    email: String
+    role: String
+  }
+
+  input EmployeesWithProjects {
+    id: ID!
+    projects: [ProjectInput]!
+  }
+
+  input ProjectsWithEmployees {
+    id: ID!
+    employees: [EmployeeInput]!
+  }
+
+  input EmployeeInput {
+    id: ID!
+    name: String
+    email: String
+    role: String
+  }
+
   type Project {
     id: ID!
     name: String
@@ -33,6 +64,9 @@ const typeDefs = gql`
 
     deleteEmployee(id: String!): Employee
     deleteProject(id: String!): Project
+
+    updateEmployeeProjects(employeesWithProjects: [EmployeesWithProjects!]): [Employee]
+    updateProjectEmployees(projectsWithEmployees: [ProjectsWithEmployees!]): [Project]
   }
 `;
 
