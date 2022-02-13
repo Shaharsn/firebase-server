@@ -1,8 +1,9 @@
+//# TO RUN - firebase serve
+
 const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
-
-input ProjectInput {
+  input ProjectInput {
     id: ID!
     name: String
     description: String
@@ -23,13 +24,6 @@ input ProjectInput {
   input ProjectsWithEmployees {
     id: ID!
     employees: [EmployeeInput]!
-  }
-
-  input EmployeeInput {
-    id: ID!
-    name: String
-    email: String
-    role: String
   }
 
   type Project {
@@ -56,17 +50,31 @@ input ProjectInput {
   }
 
   type Mutation {
-    addEmployee(id: String!, name: String!, email: String!, role: String!): Employee
+    addEmployee(
+      id: String!
+      name: String!
+      email: String!
+      role: String!
+    ): Employee
     addProject(id: String!, name: String!, description: String): Project
 
-    updateEmployee(id: String!, name: String, email: String, role: String): Employee
+    updateEmployee(
+      id: String!
+      name: String
+      email: String
+      role: String
+    ): Employee
     updateProject(id: String!, name: String, description: String): Project
 
     deleteEmployee(id: String!): Employee
     deleteProject(id: String!): Project
 
-    updateEmployeeProjects(employeesWithProjects: [EmployeesWithProjects!]): [Employee]
-    updateProjectEmployees(projectsWithEmployees: [ProjectsWithEmployees!]): [Project]
+    updateEmployeeProjects(
+      employeesWithProjects: [EmployeesWithProjects!]
+    ): [Employee]
+    updateProjectEmployees(
+      projectsWithEmployees: [ProjectsWithEmployees!]
+    ): [Project]
   }
 `;
 
